@@ -120,7 +120,7 @@ def read_details_list(session: Session = Depends(get_session)):
 
 
 @app.post("/details/{address}", response_model = schema.AddressBase)
-def get_in_range(address:str, session: Session = Depends(get_session)):
+def read_coordinates(address:str, session: Session = Depends(get_session)):
 
     #get_add1=session.query(models.Addresses.address).get(address)
     get_add1 = session.query(models.Addresses).filter(models.Addresses.address==address).first()
@@ -128,34 +128,35 @@ def get_in_range(address:str, session: Session = Depends(get_session)):
     if not get_add1:
         raise HTTPException(status_code=404, detail=f"Details with Address {address} not found")
 
-    
-
- 
-    
-    # l_get_add1=list(get_add1)
-    # print(l_get_add1)
-    # ranges=[]
-
-    # for i in l_get_add1:
-    #     if distance(addr,i).km < radius:
-    #         ranges.append(i)
-    # print(ranges,addr)
-    # return ranges
 
     return get_add1
 
 
-@app.get("/range")
-def read_cord(session: Session = Depends(get_session)):
+@app.get("/range/{address}")
+def get_cord_range(lat:float,long:float, session: Session = Depends(get_session)):
+
+    lat_longList=[]
+    ranges=[]
 
     details_list = session.query(models.Addresses.address).all()
 
     json_compatible_data = jsonable_encoder(details_list)
     
-    # d1={k:v for e in json_compatible_data for (k,v) in e.items()}
-    # print (d1)
-    # return d1
-    return JSONResponse(content=json_compatible_data)
+    for index in range(len(json_compatible_data)):
+        for key in json_compatible_data[index]:
+            lat_longList.append(json_compatible_data[index][key])
+    lat_long_input=(lat,long)
+    print(lat_long_input)
+    for i in lat_longList:
+        if distance(lat_long_input,i).km<1:
+            ranges.append(i)
+    
+    final_list=[]
+    for i in range(len(ranges)):
+        location = geolocator.reverse(ranges[i])
+        final_list.append(location)
+
+    return final_list
 
 
 
