@@ -16,10 +16,10 @@ This API currently takes 2 inputs. (Username & Address) <br>
 You can Install these packages using pip Or install from requirements using below command <br>
  <a href="#">pip install -r requirements.txt</a> <br>
 <h3> Files list</h3>
-- database.py : Creates an sqltie database using sqlalchemy <br>
+- <b>database.py : Creates an sqltie database using sqlalchemy <br>
 - schema.py : Contains the description of tables, indexes (metadata) <br>
 - models.py : Contains details about tables and their columns that should be created in the database <br>
-(I have created empty directories "Templates, Data" for now so that they can be used if the API extends in the future) <br>
+(I have created empty directories "Templates, Data" for now so that they can be used if the API extends in the future) <br> <br>
 
 Methods used and their purposes:<br>
 - Create Details : This method takes username and address as inputs and creates an address list with coordinates from the address into the database. <br>
