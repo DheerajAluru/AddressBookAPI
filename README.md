@@ -4,7 +4,8 @@
  
 This API currently takes 2 inputs. (Username & Address) <br>
 
-Steps to use this API: <br>
+<h3> Steps to use this API: </h3> <br>
 
-<clipboard-copy value="src/index.js">Copy</clipboard-copy>
+<h3>- Packages needed: <h3> <br>
+
 
