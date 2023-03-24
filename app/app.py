@@ -46,7 +46,7 @@ Base.metadata.create_all(engine)
 def root():
     return "Root"
  
-# This below function takes username and address as inputs and creates an address list with coordinates from the address into the database.
+# This below method takes username and address as inputs and creates an address list with coordinates from the address into the database.
 
 
 @app.post("/details",response_model=schema.AddressBase, status_code=status.HTTP_201_CREATED)
@@ -66,7 +66,7 @@ def create_details(details: schema.AddressBase, session: Session = Depends(get_s
  
     return addressDB
 
-#This function reads the database and returns results based on ID
+#This method reads the database and returns results based on ID
  
 @app.get("/details/{id}", response_model=schema.AddressBase)
 def read_details(id: int, session: Session = Depends(get_session)):
@@ -77,7 +77,7 @@ def read_details(id: int, session: Session = Depends(get_session)):
  
     return get_ID
  
-# This below function updates address along with coordinates for the respective address
+# This below method updates address along with coordinates for the respective address
 
 @app.put("/details/{id}", response_model=schema.AddressBase)
 def update_details(id: int, username: str, addDesc:str, session: Session = Depends(get_session)):
@@ -103,7 +103,7 @@ def update_details(id: int, username: str, addDesc:str, session: Session = Depen
     return get_ID
  
 
-# This below function deletes items from database based on ID
+# This below method deletes items from database based on ID
 
 @app.delete("/details/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_details(id: int, session: Session = Depends(get_session)):
@@ -120,7 +120,7 @@ def delete_details(id: int, session: Session = Depends(get_session)):
  
     return None
  
-#This function reads the entire database (Select *)
+#This method reads the entire database (Select *)
 
 @app.get("/details", response_model = List[schema.AddressBase])
 def read_details_list(session: Session = Depends(get_session)):
@@ -129,7 +129,7 @@ def read_details_list(session: Session = Depends(get_session)):
  
     return details_list 
 
-# This below function takes coordinates as Input as returns its respective address from the database.
+# This below method takes coordinates as Input as returns its respective address from the database.
 
 @app.post("/details/{coordinates}", response_model = schema.AddressBase)
 def read_coordinates(address:str, session: Session = Depends(get_session)):
@@ -144,7 +144,7 @@ def read_coordinates(address:str, session: Session = Depends(get_session)):
     return get_add1
 
 
-# This below function takes coordinates as Input as returns its respective address/ adresses in its range (default 1km) from the database.
+# This below method takes coordinates as Input as returns its respective address/ adresses in its range (default 1km) from the database.
 
 @app.post("/details/{address}")
 def read_coords(address:str, session: Session = Depends(get_session)):
