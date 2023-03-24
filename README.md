@@ -20,7 +20,6 @@ You can Install these packages using pip Or install from requirements using belo
 - <b>schema.py</b> : Contains the description of tables, indexes (metadata) <br>
 - <b>models.py</b> : Contains details about tables and their columns that should be created in the database <br>
 (I have created empty directories "Templates, Data" for now so that they can be used if the API extends in the future) <br> <br>
-
  <h3>Methods used and their purposes:</h3>
 - <b>Create Details</b> : This method takes username and address as inputs and creates an address list with coordinates from the address into the database. <br>
 - <b>Read Details </b>: This method reads the database and returns results based on ID<br>
