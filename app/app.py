@@ -1,19 +1,12 @@
-import uvicorn
 from fastapi import FastAPI, status, HTTPException, Depends 
 from fastapi.middleware.cors import CORSMiddleware
-import fastapi.responses as rep
-import os
 from app.database import engine, SessionLocal , Base
 from sqlalchemy.orm import Session
 import app.schema as schema
 import app.models as models
 from typing import List
-import re
 from geopy.geocoders import Nominatim
-from geopy.distance import geodesic
-from geopy.distance import great_circle
 from geopy.distance import distance
-from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 
 
