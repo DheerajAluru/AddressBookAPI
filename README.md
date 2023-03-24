@@ -29,7 +29,9 @@ You can Install these packages using pip Or install from requirements using belo
 - <b>Read Coordinates </b>: Takes coordinates as Input as returns its respective address from the database.<br>
 - <b>Read Coords </b>: This method takes coordinates as Input as returns its respective address/ adresses in its range (default 1km) from the database.<br>
 <b>Storing the contents in the database as below </b>
-![image](https://drive.google.com/uc?export=view&id=1RrH9emM4BmA95ENaJHF_VqY3IdeGHzbM)
+
+<a href="https://drive.google.com/uc?export=view&id=<FILEID>"><img src="https://drive.google.com/uc?export=view&id=1RrH9emM4BmA95ENaJHF_VqY3IdeGHzbM" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+
 
 Used Geopy to convert coordinates from address and vice versa. Followed steps from  <a href="https://geopy.readthedocs.io/en/latest/#">Here</a> <br>
 
