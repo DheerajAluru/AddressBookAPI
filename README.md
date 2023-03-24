@@ -28,7 +28,7 @@ You can Install these packages using pip Or install from requirements using belo
 - <b>Delete Details </b>: Deletes items from database based on ID<br>
 - <b>Read Coordinates </b>: Takes coordinates as Input as returns its respective address from the database.<br>
 - <b>Read Coords </b>: This method takes coordinates as Input as returns its respective address/ adresses in its range (default 1km) from the database.<br>
-
+<br>
 <b>Storing the contents in the database as below </b><br>
 
 
