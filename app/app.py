@@ -46,6 +46,9 @@ Base.metadata.create_all(engine)
 def root():
     return "Root"
  
+# This below function takes username and address as inputs and creates an address list with coordinates from the address into the database.
+
+
 @app.post("/details",response_model=schema.AddressBase, status_code=status.HTTP_201_CREATED)
 def create_details(details: schema.AddressBase, session: Session = Depends(get_session)):
 
@@ -62,6 +65,8 @@ def create_details(details: schema.AddressBase, session: Session = Depends(get_s
     session.refresh(addressDB)
  
     return addressDB
+
+#This function reads the database and returns results based on ID
  
 @app.get("/details/{id}", response_model=schema.AddressBase)
 def read_details(id: int, session: Session = Depends(get_session)):
@@ -72,6 +77,8 @@ def read_details(id: int, session: Session = Depends(get_session)):
  
     return get_ID
  
+# This below function updates address along with coordinates for the respective address
+
 @app.put("/details/{id}", response_model=schema.AddressBase)
 def update_details(id: int, username: str, addDesc:str, session: Session = Depends(get_session)):
 
@@ -95,6 +102,9 @@ def update_details(id: int, username: str, addDesc:str, session: Session = Depen
  
     return get_ID
  
+
+# This below function deletes items from database based on ID
+
 @app.delete("/details/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_details(id: int, session: Session = Depends(get_session)):
  
@@ -110,6 +120,8 @@ def delete_details(id: int, session: Session = Depends(get_session)):
  
     return None
  
+#This function reads the entire database (Select *)
+
 @app.get("/details", response_model = List[schema.AddressBase])
 def read_details_list(session: Session = Depends(get_session)):
  
@@ -117,9 +129,9 @@ def read_details_list(session: Session = Depends(get_session)):
  
     return details_list 
 
+# This below function takes coordinates as Input as returns its respective address from the database.
 
-
-@app.post("/details/{address}", response_model = schema.AddressBase)
+@app.post("/details/{coordinates}", response_model = schema.AddressBase)
 def read_coordinates(address:str, session: Session = Depends(get_session)):
 
     #get_add1=session.query(models.Addresses.address).get(address)
@@ -132,32 +144,42 @@ def read_coordinates(address:str, session: Session = Depends(get_session)):
     return get_add1
 
 
-@app.get("/range/{address}")
-def get_cord_range(lat:float,long:float, session: Session = Depends(get_session)):
+# This below function takes coordinates as Input as returns its respective address/ adresses in its range (default 1km) from the database.
 
+@app.post("/details/{address}")
+def read_coords(address:str, session: Session = Depends(get_session)):
+
+    #get_add1=session.query(models.Addresses.address).get(address)
     lat_longList=[]
     ranges=[]
 
     details_list = session.query(models.Addresses.address).all()
 
     json_compatible_data = jsonable_encoder(details_list)
-    
+
     for index in range(len(json_compatible_data)):
         for key in json_compatible_data[index]:
-            lat_longList.append(json_compatible_data[index][key])
-    lat_long_input=(lat,long)
-    print(lat_long_input)
+            lat_longList.append([json_compatible_data[index][key]])
+
+    lat_long_input=(address)
+
     for i in lat_longList:
         if distance(lat_long_input,i).km<1:
             ranges.append(i)
-    
+
+    print("range list",ranges)
+
     final_list=[]
+
     for i in range(len(ranges)):
         location = geolocator.reverse(ranges[i])
-        final_list.append(location)
+        final_list.append(location.address)
+
+    print("final list", final_list)
+
 
     return final_list
-
+    
 
 
 
