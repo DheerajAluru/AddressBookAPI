@@ -5,7 +5,7 @@
 This API currently takes 2 inputs. (Username & Address) <br>
 
 <h3> Steps to use this API: </h3> <br>
-<h3>- Packages needed: <h3> <br>
+<h3>- Packages needed: </h3> <br>
 Having a virtual enviroment is preferable <br>
  -FASTPI
  -Pydantic
