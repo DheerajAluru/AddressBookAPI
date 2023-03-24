@@ -9,7 +9,7 @@ class AddressBase(OurBaseModel):
     id : int 
     username: str
     addDesc : str
-    #coordinate_add : str
+
 
 class Config:
     orm_mode=True
